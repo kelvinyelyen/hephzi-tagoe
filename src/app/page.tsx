@@ -8,7 +8,7 @@ export default function Home() {
       {/* Premium Top Navigation Bar */}
       <Header />
 
-      {/* Main Column Biography Essay & Timeline */}
+      {/* Main Biography, Services, & Engagements */}
       <Hero />
 
       {/* Comprehensive Premium Footer Section */}

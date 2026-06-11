@@ -3,6 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface VideoClip {
   title: string;
@@ -12,13 +13,11 @@ interface VideoClip {
   youtubeId: string;
 }
 
-interface NewsCard {
-  title: string;
+
+interface SpeakingEngagement {
+  location: string;
   host: string;
-  year: string;
-  type: string;
-  description: string;
-  image?: string;
+  topic: string;
 }
 
 const VIDEO_CLIPS: VideoClip[] = [
@@ -37,6 +36,13 @@ const VIDEO_CLIPS: VideoClip[] = [
     youtubeId: "VhXublmWOVk"
   },
   {
+    title: "The work that gave birth to Gheekmedia",
+    host: "Gheek Media",
+    image: "https://i.ytimg.com/vi/2aa6USQZlCM/hqdefault.jpg",
+    buttonLabel: "Watch",
+    youtubeId: "2aa6USQZlCM"
+  },
+  {
     title: "Skin Biology with Dr Hephzi Tagoe",
     host: "Dr Hanat",
     image: "https://i.ytimg.com/vi/-erz54CIpPA/hqdefault.jpg",
@@ -45,30 +51,64 @@ const VIDEO_CLIPS: VideoClip[] = [
   }
 ];
 
-const NEWS_ARTICLES: NewsCard[] = [
+const SPEAKING_ENGAGEMENTS: SpeakingEngagement[] = [
   {
-    title: "Fellow in Focus: How Dr. Hephzi Tagoe is Transforming Public Science Capitals",
-    host: "Winston Churchill Memorial Trust Spotlight",
-    year: "2020",
-    type: "Press Spotlight",
-    description: "A feature on Churchill Fellowship findings on informal science outreach across Finland and Ghana.",
-    image: "/fellowship_illust.png"
+    location: "EU Parliament",
+    host: "Evidence Matters",
+    topic: "Effective public engagement and translating biology findings"
   },
   {
-    title: "Annual Street Science Festival Brings Laboratory Magic to Shopping Centres",
-    host: "Basildon Standard",
-    year: "2019",
-    type: "Local Press Feature",
-    description: "Spotlighting the annual festival bringing hands-on biological experiments directly to shopping centres."
+    location: "Imperial College London",
+    host: "BBSTEM",
+    topic: "From industry through academia to business"
   },
   {
-    title: "Outreach in Action: Committee Chair Dr. Hephzi Tagoe on Diversity and Engagement",
-    host: "The Biologist (Royal Society of Biology Magazine)",
-    year: "2018",
-    type: "Society Article Mention",
-    description: "An interview on directing regional biology campaigns and advocating for diversity in STEM."
+    location: "Kenya",
+    host: "Wellcome International Engagement Workshop",
+    topic: "Engaging underserved communities in health research"
+  },
+  {
+    location: "University of Warsaw, Poland",
+    host: "Sense About Science",
+    topic: "Standing up for science"
+  },
+  {
+    location: "Charles University, Prague",
+    host: "International Biology Olympiad",
+    topic: "Good practice in education"
+  },
+  {
+    location: "Nottingham, UK",
+    host: "Festival of Science and Curiosity",
+    topic: "Doing real science in schools"
+  },
+  {
+    location: "Queen Mary University, London",
+    host: "London SciComm Symposium",
+    topic: "Community engagement"
+  },
+  {
+    location: "University of Birmingham, UK",
+    host: "Public Engagement Symposium",
+    topic: "Community engagement"
+  },
+  {
+    location: "Southend, UK",
+    host: "Southend Tech Meetup",
+    topic: "Feeding the biotech pipeline with future skills"
+  },
+  {
+    location: "British Society for Investigative Journalism",
+    host: "Various Panels",
+    topic: "Various technical biology panels"
+  },
+  {
+    location: "Ghana",
+    host: "Various Forums",
+    topic: "Grassroots STEM capacity building and public workshops"
   }
 ];
+
 
 export default function MediaPage() {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -122,16 +162,17 @@ export default function MediaPage() {
   };
 
   return (
-    <main className="app-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', gap: '4rem' }}>
+    <main className="app-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
       {/* Shared Monogram Header */}
       <Header />
 
-      {/* Title Block: Confined to 720px to prevent long text line lengths */}
-      <div style={{ maxWidth: '720px', width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '4rem', marginTop: '2rem' }}>
+        {/* Title Block: Confined to 720px to prevent long text line lengths */}
+        <div style={{ maxWidth: '720px', width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <h1 className="hero-heading" style={{ fontSize: '3rem', marginBottom: '0.25rem' }}>
           Media & Public Engagement
         </h1>
-        <p style={{ fontFamily: "'Lato', sans-serif", color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7' }}>
+        <p style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7' }}>
           TEDx speeches, guest podcasts, and press spotlights documenting my public outreach, Churchill Fellowship travels, and street science initiatives.
         </p>
       </div>
@@ -210,46 +251,34 @@ export default function MediaPage() {
         </div>
       </section>
 
-      {/* Section 2: IN THE NEWS (Expanded to match Header margins - true CSS masonry layout) */}
-      <section style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
+      {/* Section 2: SPEAKING ENGAGEMENTS */}
+      <section className="speaking-section" style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', width: '100%' }}>
         <div className="section-pointer">
-          <span>→</span> IN THE NEWS
+          <span>→</span> SPEAKING ENGAGEMENTS
         </div>
 
-        <div className="featured-cards-masonry">
-          {NEWS_ARTICLES.map((article, idx) => (
-            <div key={idx} className="featured-card">
-              {article.image && (
-                <div className="featured-card-image-frame">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="featured-card-image"
-                  />
-                </div>
-              )}
-              
-              <span className="featured-card-icon">
-                {article.type}
-              </span>
+        <div style={{ maxWidth: '720px', width: '100%', marginBottom: '1.5rem' }}>
+          <h3 className="hero-subtitle" style={{ fontSize: '1.45rem', fontStyle: 'normal', color: 'var(--primary-color)', marginBottom: '0.75rem' }}>
+            Are you looking for a subject knowledge expert for your keynote talk or panel discussion?
+          </h3>
+          <p style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", fontSize: '0.9rem', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+            Here are select samples of my speaking engagements. Get in touch to discuss requirements and request a booking quote.
+          </p>
+        </div>
 
-              <h3 className="featured-card-title">
-                {article.title}
-              </h3>
-
-              <p className="featured-card-desc">
-                {article.description}
-              </p>
-
-              <div className="featured-card-meta">
-                <span>{article.host}</span>
-                <span style={{ color: 'var(--accent-teal)' }}>•</span>
-                <span>{article.year}</span>
-              </div>
+        <div className="speaking-grid">
+          {SPEAKING_ENGAGEMENTS.map((event, idx) => (
+            <div key={idx} className="speaking-item">
+              <h4 className="speaking-item-title">{event.topic}</h4>
+              <p className="speaking-item-host">{event.host}</p>
+              <span className="speaking-item-meta">Talk &bull; {event.location}</span>
             </div>
           ))}
         </div>
       </section>
+
+
+      </div>
 
       {/* Shared Footer */}
       <Footer />

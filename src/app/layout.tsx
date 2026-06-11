@@ -1,5 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { Lato } from "next/font/google";
 import "./globals.css";
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  variable: "--font-lato",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Dr. Hephzi Angela Tagoe | Scientist, Communicator, Founder",
@@ -42,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={lato.variable}>
         {children}
       </body>
     </html>

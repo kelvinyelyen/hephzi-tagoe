@@ -72,19 +72,19 @@ const PUBLIC_ESSAYS: Publication[] = [
 
 export default function PublicationsPage() {
   return (
-    <main className="app-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', gap: '4rem' }}>
+    <main className="app-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%' }}>
       {/* Shared Monogram Header */}
       <Header />
 
       {/* Main Column: 720px wide layout for readability */}
-      <div style={{ maxWidth: '720px', width: '100%', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+      <div style={{ maxWidth: '720px', width: '100%', display: 'flex', flexDirection: 'column', gap: '4rem', marginTop: '2rem' }}>
         
         {/* Title Block */}
         <div>
           <h1 className="hero-heading" style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>
             Selected Publications
           </h1>
-          <p style={{ fontFamily: "'Lato', sans-serif", color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7', maxWidth: '640px' }}>
+          <p style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7', maxWidth: '640px' }}>
             A curated list of my peer-reviewed molecular skin biology research, regional STEM capacity building reports, and public science advocacy writing.
           </p>
         </div>
@@ -99,12 +99,12 @@ export default function PublicationsPage() {
             {PEER_REVIEWED.map((pub, idx) => (
               <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <h3 className="timeline-header" style={{ fontSize: '1.25rem', fontWeight: 500, lineHeight: '1.4' }}>
-                  <span className="editorial-link" style={{ borderBottomColor: 'rgba(196, 38, 98, 0.15)', cursor: 'default' }}>
+                  <span className="editorial-link" style={{ borderBottomColor: 'rgba(190, 24, 93, 0.15)', cursor: 'default' }}>
                     {pub.title}
                   </span>
                 </h3>
                 
-                <div style={{ fontFamily: "'Lato', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', gap: '0.8rem', flexWrap: 'wrap', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
+                <div style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', gap: '0.8rem', flexWrap: 'wrap', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
                   <span>{pub.authors}</span>
                   <span style={{ color: 'var(--accent-teal)' }}>•</span>
                   <span>{pub.journal}</span>
@@ -130,12 +130,12 @@ export default function PublicationsPage() {
             {POLICY_REPORTS.map((pub, idx) => (
               <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <h3 className="timeline-header" style={{ fontSize: '1.25rem', fontWeight: 500, lineHeight: '1.4' }}>
-                  <span className="editorial-link" style={{ borderBottomColor: 'rgba(196, 38, 98, 0.15)', cursor: 'default' }}>
+                  <span className="editorial-link" style={{ borderBottomColor: 'rgba(190, 24, 93, 0.15)', cursor: 'default' }}>
                     {pub.title}
                   </span>
                 </h3>
                 
-                <div style={{ fontFamily: "'Lato', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', gap: '0.8rem', flexWrap: 'wrap', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
+                <div style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', gap: '0.8rem', flexWrap: 'wrap', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
                   <span>{pub.authors}</span>
                   <span style={{ color: 'var(--accent-teal)' }}>•</span>
                   <span>{pub.journal}</span>
@@ -161,12 +161,12 @@ export default function PublicationsPage() {
             {PUBLIC_ESSAYS.map((pub, idx) => (
               <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                 <h3 className="timeline-header" style={{ fontSize: '1.25rem', fontWeight: 500, lineHeight: '1.4' }}>
-                  <span className="editorial-link" style={{ borderBottomColor: 'rgba(196, 38, 98, 0.15)', cursor: 'default' }}>
+                  <span className="editorial-link" style={{ borderBottomColor: 'rgba(190, 24, 93, 0.15)', cursor: 'default' }}>
                     {pub.title}
                   </span>
                 </h3>
                 
-                <div style={{ fontFamily: "'Lato', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', gap: '0.8rem', flexWrap: 'wrap', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
+                <div style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', gap: '0.8rem', flexWrap: 'wrap', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
                   <span>{pub.authors}</span>
                   <span style={{ color: 'var(--accent-teal)' }}>•</span>
                   <span>{pub.journal}</span>

@@ -1,8 +1,10 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { Menu, X } from 'lucide-react';
 
 interface NavItem {
   label: string;
@@ -11,62 +13,48 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { label: 'About', href: '/' },
+  { label: 'About', href: '/about' },
   { label: 'Publications', href: '/publications' },
   { label: 'Media', href: '/media' },
+  { label: 'Newsletter', href: '/newsletter' },
   { label: 'GhScientific', href: 'https://ghscientific.com', isExternal: true },
 ];
 
 export default function Header() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <motion.header
       className="header-navbar"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1.5rem 0',
-        width: '100%',
-        backgroundColor: 'transparent',
-        borderBottom: 'none',
-        marginBottom: '4rem',
-      }}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      style={{ width: '100%', position: 'sticky', top: 0 }}
     >
-      {/* Brand logo: Elegant Monogram with Teal arrows */}
+      {/* Brand logo: Image asset from public folder */}
       <Link
         href="/"
         className="header-brand"
         style={{
-          fontFamily: "'DM Serif Display', Georgia, serif",
-          fontSize: '1.45rem',
-          fontWeight: 400,
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
-          gap: '0.4rem',
-          transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
           borderBottom: 'none',
           textDecoration: 'none',
         }}
+        aria-label="Dr. Hephzi Home"
+        onClick={() => setIsMobileMenuOpen(false)}
       >
-        <span style={{ color: 'var(--accent-teal)', fontStyle: 'italic', fontWeight: 600 }}>←</span>
-        <span style={{ color: 'var(--primary-color)', fontStyle: 'italic' }}>H</span>
-        <span style={{ color: 'var(--accent-teal)', fontStyle: 'italic', fontWeight: 600 }}>→</span>
+        <img 
+          src="/HANAT.png" 
+          alt="HANAT Logo" 
+          style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
+        />
       </Link>
 
       {/* Navigation center links (desktop) */}
-      <nav
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '2rem',
-        }}
-      >
+      <nav className="header-nav">
         {NAV_ITEMS.map((item, index) => {
           const isActive = !item.isExternal && pathname === item.href;
           const linkProps = item.isExternal
@@ -77,26 +65,58 @@ export default function Header() {
             <Link
               key={index}
               {...linkProps}
-              style={{
-                fontFamily: "'Lato', sans-serif",
-                fontSize: '0.82rem',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                cursor: 'pointer',
-                color: isActive ? 'var(--accent-magenta)' : 'var(--text-muted)',
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                borderBottom: isActive ? '1.5px solid var(--accent-magenta)' : '1.5px solid transparent',
-                paddingBottom: '0.2rem',
-                textDecoration: 'none',
-              }}
+              className={`header-nav-link ${isActive ? 'active' : ''}`}
+              style={{ textDecoration: 'none' }}
             >
               {item.label}
             </Link>
           );
         })}
       </nav>
+
+      {/* Mobile menu toggle button */}
+      <button
+        className="header-mobile-toggle"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-expanded={isMobileMenuOpen}
+        aria-label="Toggle navigation menu"
+      >
+        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
+
+      {/* Mobile menu drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div 
+            className="header-mobile-drawer"
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <nav className="header-mobile-nav">
+              {NAV_ITEMS.map((item, index) => {
+                const isActive = !item.isExternal && pathname === item.href;
+                const linkProps = item.isExternal
+                  ? { href: item.href, target: '_blank', rel: 'noopener noreferrer' }
+                  : { href: item.href };
+
+                return (
+                  <Link
+                    key={index}
+                    {...linkProps}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={`header-mobile-link ${isActive ? 'active' : ''}`}
+                    style={{ textDecoration: 'none' }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
-
