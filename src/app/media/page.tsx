@@ -116,6 +116,10 @@ export default function MediaPage() {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
+  
+  // Track if a drag occurred to prevent accidental watch modal triggers
+  const [dragged, setDragged] = useState(false);
+  const mouseDownCoords = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     if (selectedVideoId) {
@@ -131,6 +135,8 @@ export default function MediaPage() {
   const handleMouseDown = (e: React.MouseEvent) => {
     if (!sliderRef.current) return;
     setIsDown(true);
+    setDragged(false);
+    mouseDownCoords.current = { x: e.clientX, y: e.clientY };
     setStartX(e.pageX - sliderRef.current.offsetLeft);
     setScrollLeft(sliderRef.current.scrollLeft);
   };
@@ -149,6 +155,18 @@ export default function MediaPage() {
     const x = e.pageX - sliderRef.current.offsetLeft;
     const walk = (x - startX) * 1.5; // Drag sensitivity/speed multiplier
     sliderRef.current.scrollLeft = scrollLeft - walk;
+
+    // Declare a drag if mouse moved more than 5px
+    if (Math.abs(e.clientX - mouseDownCoords.current.x) > 5 || Math.abs(e.clientY - mouseDownCoords.current.y) > 5) {
+      setDragged(true);
+    }
+  };
+
+  const handleClickCapture = (e: React.MouseEvent) => {
+    if (dragged) {
+      e.stopPropagation();
+      e.preventDefault();
+    }
   };
 
   const scroll = (direction: 'left' | 'right') => {
@@ -190,13 +208,14 @@ export default function MediaPage() {
           onMouseLeave={handleMouseLeave}
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
+          onClickCapture={handleClickCapture}
           style={{
             cursor: isDown ? 'grabbing' : 'grab',
             userSelect: 'none',
           }}
         >
           {VIDEO_CLIPS.map((clip, idx) => (
-            <div key={idx} className="media-slider-card" style={{ flex: '0 0 340px' }}>
+            <div key={idx} className="media-slider-card">
               <div 
                 className="slider-image-frame" 
                 style={{ cursor: 'pointer' }}
@@ -271,7 +290,13 @@ export default function MediaPage() {
             <div key={idx} className="speaking-item">
               <h4 className="speaking-item-title">{event.topic}</h4>
               <p className="speaking-item-host">{event.host}</p>
-              <span className="speaking-item-meta">Talk &bull; {event.location}</span>
+              <div className="speaking-item-meta">
+                <span>Talk</span>
+                <span>
+                  <span className="speaking-item-meta-separator">&nbsp;&bull;&nbsp;</span>
+                  {event.location}
+                </span>
+              </div>
             </div>
           ))}
         </div>

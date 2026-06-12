@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 interface NavItem {
@@ -24,9 +24,20 @@ export default function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <motion.header
-      className="header-navbar"
+      className={`header-navbar ${isMobileMenuOpen ? 'menu-open' : ''}`}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -46,9 +57,9 @@ export default function Header() {
         aria-label="Dr. Hephzi Home"
         onClick={() => setIsMobileMenuOpen(false)}
       >
-        <img 
-          src="/HANAT.png" 
-          alt="HANAT Logo" 
+        <img
+          src="/HANAT.png"
+          alt="HANAT Logo"
           style={{ height: '50px', width: 'auto', objectFit: 'contain' }}
         />
       </Link>
@@ -79,15 +90,17 @@ export default function Header() {
         className="header-mobile-toggle"
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         aria-expanded={isMobileMenuOpen}
-        aria-label="Toggle navigation menu"
+        aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
       >
-        {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        <div className="hamburger-box">
+          <span className={`hamburger-inner ${isMobileMenuOpen ? 'open' : ''}`}></span>
+        </div>
       </button>
 
       {/* Mobile menu drawer */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
+          <motion.div
             className="header-mobile-drawer"
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -113,6 +126,15 @@ export default function Header() {
                   </Link>
                 );
               })}
+
+              <button
+                className="header-mobile-close-btn"
+                onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <X size={16} />
+                <span>Close Menu</span>
+              </button>
             </nav>
           </motion.div>
         )}

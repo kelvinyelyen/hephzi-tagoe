@@ -119,7 +119,7 @@ export default function AboutPage() {
                 draggable="false"
               />
             </div>
-            <div className="about-book-container" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center', marginTop: '4rem' }}>
+            <div className="about-book-container" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
               <div className="about-book-thumbnail">
                 <a href="https://www.amazon.co.uk/SOULFUL-SERENADE-COLLECTION-LOVE-POEMS-ebook/dp/B0D6TZ28K9" target="_blank" rel="noopener noreferrer">
                   <img
