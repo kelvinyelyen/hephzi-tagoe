@@ -42,7 +42,7 @@ export default function Hero() {
           Dr. Hephzi Angela Tagoe
         </motion.h1>
 
-        <motion.p className="about-hero-subtitle" variants={itemVariants} style={{ marginBottom: '2.5rem' }}>
+        <motion.p className="about-hero-subtitle" variants={itemVariants} style={{ marginBottom: '1rem' }}>
           Research scientist, science communicator, and founding director of <a href="https://ghscientific.org" target="_blank" rel="noopener noreferrer" className="editorial-link">GhScientific</a>. Building bridges between scientific discovery, education, and community capacity.
         </motion.p>
 

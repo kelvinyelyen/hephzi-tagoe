@@ -49,7 +49,7 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{ width: '100%', marginTop: '3.5rem' }}>
+    <footer style={{ width: '100%', marginTop: '0.5rem' }}>
       {/* Cozy Minimalist Two-Column Footer Links */}
       <div className="site-footer">
         {/* Left Column: RSS-style details, socials, copyright */}

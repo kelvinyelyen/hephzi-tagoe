@@ -77,11 +77,11 @@ export default function PublicationsPage() {
       <Header />
 
       {/* Main Column: 720px wide layout for readability */}
-      <div style={{ maxWidth: '720px', width: '100%', display: 'flex', flexDirection: 'column', gap: '4rem', marginTop: '2rem' }}>
+      <div className="publications-content">
 
         {/* Title Block */}
         <div>
-          <h1 className="hero-heading" style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>
+          <h1 className="page-title">
             Selected Publications
           </h1>
           <p style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7', maxWidth: '640px' }}>
@@ -105,15 +105,11 @@ export default function PublicationsPage() {
                 </h3>
 
                 <div className="pub-metadata">
-                  <span>{pub.authors}</span>
                   <span>
+                    {pub.authors}
                     <span className="pub-metadata-separator">&nbsp;&bull;&nbsp;</span>
-                    {pub.journal}
                   </span>
-                  <span>
-                    <span className="pub-metadata-separator">&nbsp;&bull;&nbsp;</span>
-                    {pub.year}
-                  </span>
+                  <span>{pub.journal}, {pub.year}</span>
                 </div>
 
                 <p className="timeline-desc" style={{ marginTop: '0.25rem' }}>
@@ -140,15 +136,11 @@ export default function PublicationsPage() {
                 </h3>
 
                 <div className="pub-metadata">
-                  <span>{pub.authors}</span>
                   <span>
+                    {pub.authors}
                     <span className="pub-metadata-separator">&nbsp;&bull;&nbsp;</span>
-                    {pub.journal}
                   </span>
-                  <span>
-                    <span className="pub-metadata-separator">&nbsp;&bull;&nbsp;</span>
-                    {pub.year}
-                  </span>
+                  <span>{pub.journal}, {pub.year}</span>
                 </div>
 
                 <p className="timeline-desc" style={{ marginTop: '0.25rem' }}>
@@ -175,15 +167,11 @@ export default function PublicationsPage() {
                 </h3>
 
                 <div className="pub-metadata">
-                  <span>{pub.authors}</span>
                   <span>
+                    {pub.authors}
                     <span className="pub-metadata-separator">&nbsp;&bull;&nbsp;</span>
-                    {pub.journal}
                   </span>
-                  <span>
-                    <span className="pub-metadata-separator">&nbsp;&bull;&nbsp;</span>
-                    {pub.year}
-                  </span>
+                  <span>{pub.journal}, {pub.year}</span>
                 </div>
 
                 <p className="timeline-desc" style={{ marginTop: '0.25rem' }}>

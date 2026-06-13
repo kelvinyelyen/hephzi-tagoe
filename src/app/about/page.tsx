@@ -106,6 +106,38 @@ export default function AboutPage() {
               On the side, I write and speak about <strong className="magenta-highlight">diversity in science</strong>, skin barrier profiling, and designing <strong className="magenta-highlight">creative after-school curriculums</strong> that foster a lifelong curiosity in young minds.
             </p>
           </div>
+
+          {/* Mobile-only Book Card */}
+          <div className="about-book-container mobile-only-book" style={{ flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+            <div className="about-book-thumbnail">
+              <a href="https://www.amazon.co.uk/SOULFUL-SERENADE-COLLECTION-LOVE-POEMS-ebook/dp/B0D6TZ28K9" target="_blank" rel="noopener noreferrer">
+                <img
+                  src="/book1.png"
+                  alt="Soulful Serenade Book Cover"
+                  style={{ width: '100%', height: 'auto', objectFit: 'contain' }}
+                  draggable="false"
+                />
+              </a>
+            </div>
+            <div className="about-book-buttons" style={{ display: 'flex', gap: '0.75rem', width: '100%', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <a
+                href="https://www.amazon.co.uk/SOULFUL-SERENADE-COLLECTION-LOVE-POEMS-ebook/dp/B0D6TZ28K9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-book-btn"
+              >
+                Amazon
+              </a>
+              <a
+                href="https://shop.beacons.ai/hephzitagoe/7fce377d-a570-42c4-ae1a-7e0f6df8f2a7?pageViewSource=lib_view"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="about-book-btn"
+              >
+                Beacon
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Right Column: Portrait + Book Card */}
@@ -119,7 +151,8 @@ export default function AboutPage() {
                 draggable="false"
               />
             </div>
-            <div className="about-book-container" style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+            {/* Desktop-only Book Card */}
+            <div className="about-book-container desktop-only-book" style={{ flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
               <div className="about-book-thumbnail">
                 <a href="https://www.amazon.co.uk/SOULFUL-SERENADE-COLLECTION-LOVE-POEMS-ebook/dp/B0D6TZ28K9" target="_blank" rel="noopener noreferrer">
                   <img

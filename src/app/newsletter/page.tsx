@@ -176,7 +176,7 @@ export default function NewsletterArchivePage() {
 
       {/* Header section */}
       <section className="newsletter-hero">
-        <h1 className="about-hero-name" style={{ fontSize: '3rem', marginBottom: '0.25rem' }}>
+        <h1 className="page-title" style={{ marginBottom: '0.25rem' }}>
           Letters & essays
         </h1>
         <p className="about-hero-subtitle">

@@ -184,10 +184,10 @@ export default function MediaPage() {
       {/* Shared Monogram Header */}
       <Header />
 
-      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '4rem', marginTop: '2rem' }}>
+      <div className="media-content">
         {/* Title Block: Confined to 720px to prevent long text line lengths */}
         <div style={{ maxWidth: '720px', width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        <h1 className="hero-heading" style={{ fontSize: '3rem', marginBottom: '0.25rem' }}>
+        <h1 className="page-title" style={{ marginBottom: '0.25rem' }}>
           Media & Public Engagement
         </h1>
         <p style={{ fontFamily: "var(--font-lato), 'Lato', sans-serif", color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.7' }}>
